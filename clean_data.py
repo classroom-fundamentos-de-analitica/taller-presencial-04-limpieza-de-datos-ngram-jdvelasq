@@ -27,7 +27,7 @@ def create_key(df, n):
         # 4. Transforme palabras que pueden (o no) contener guiones por su version sin guion.
         .str.replace("-", "")
         # 5. Remueva puntuación y caracteres de control
-        .str.replace(".", "")
+        .str.translate(str.maketrans("", "", "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"))
         # 6. Convierta el texto a una lista de tokens
         .str.split()
         # Una el texto sin espacios en blanco
@@ -37,7 +37,7 @@ def create_key(df, n):
         # Ordene la lista de n-gramas y remueve duplicados
         .apply(lambda x: sorted(set(x)))
         # 9. Convierta la lista de tokens a una cadena de texto separada por espacios
-        .str.join(" ")
+        .str.join("")
     )
 
     return df
